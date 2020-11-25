@@ -45,10 +45,10 @@ steps:
     sleep 90
     echo "Waiting for pod redeployment"
     POD_NAME=`oc get pods -n pytest-dev -l app=pytest-calculator -o jsonpath='{range .items[0].metadata}{.name}{"\n"}{end}'`
-    echo $POD_NAME
-    oc project pytest-dev
+    echo $POD_NAME 
+    oc project pytest-dev 
     oc exec $POD_NAME -- pytest --junitxml=junit.xml 
-    oc rsync $POD_NAME:/opt/app-root/src/junit.xml $(System.DefaultWorkingDirectory) -n pytest-dev
+    oc rsync $POD_NAME:/opt/app-root/src/junit.xml $(System.DefaultWorkingDirectory) 
 - task: PublishTestResults@2
   inputs:
     testResultsFormat: 'JUnit'
